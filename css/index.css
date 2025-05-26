@@ -1,4 +1,13 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import 'css/components/header.css';
+@import 'css/components/hero.css';
+@import 'css/components/about.css';
+@import 'css/components/destinasi.css';
+@import 'css/components/gallery.css';
+@import 'css/components/review.css';
+@import 'css/components/contact.css';
+@import 'css/components/footer.css';
+
 * {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
