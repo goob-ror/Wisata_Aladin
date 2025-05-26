@@ -26,8 +26,8 @@ class Hero extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="css/root.css">
-        <link rel="stylesheet" href="css/components/hero.css">
+        <link rel="stylesheet" href="/css/root.css">
+        <link rel="stylesheet" href="/css/components/hero.css">
         <hero>
             <div class="container-hero">
                 <div class="floating-particles">
