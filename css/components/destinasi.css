@@ -1,0 +1,410 @@
+destinasi {
+    display: block;
+    width: 100%;
+    min-height: 800px;
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0;
+}
+
+.container-destinasi {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.destinasi-header {
+    text-align: center;
+    margin-bottom: 3.2rem;
+}
+
+.destinasi-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 3.2px 6.4px rgba(36, 87, 64, 0.5);
+}
+
+.destinasi-header img {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0 0.4rem;
+}
+
+.destinasi-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.4rem;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    min-height: 600px;
+}
+
+.destinasi-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    padding: 1rem;
+    margin: 40px 0 0 0;
+}
+
+.destinasi-center img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+}
+
+.destinasi-center span img {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin: 0 0 0.2rem 3rem;
+}
+
+.destinasi-center .rumah-makan-aladin {
+    width: 200px;
+    height: auto;
+    margin-right: -2rem;
+}
+
+.destinasi-center .ok-jhon-coffee {
+    width: 120px;
+    height: auto;
+    margin-left: 2rem;
+}
+
+.destinasi-center img:hover {
+    transform: scale(1.05);
+}
+
+.destination-bubble {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.destination-bubble:hover {
+    transform: scale(1.1);
+}
+
+/* Bubble Image Container */
+.bubble-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-dark));
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.destination-bubble:hover .bubble-image {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--secondary-color);
+}
+
+.bubble-image img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.destination-bubble:hover .bubble-image img {
+    transform: scale(1.05);
+}
+
+.bubble-arrow {
+    position: absolute;
+    z-index: 5;
+}
+
+.bubble-arrow img {
+    width: 200px;
+    height: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.destination-bubble:hover .bubble-arrow img {
+    transform: scale(1.1);
+}
+
+.bubble-text {
+    position: absolute;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    z-index: 5;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.bubble-text span {
+    font-family: Poppins, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: none;
+}
+
+.destination-bubble:hover .bubble-text {
+    transform: scale(1.05);
+}
+
+.destination-bubble:hover .bubble-text span {
+    color: #C4CB2F;
+}
+
+.bubble-1 {
+    top: 0%;
+    left: 5%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.bubble-1 .bubble-arrow {
+    top: 100%;
+    left: 20%;
+}
+
+.bubble-1 .bubble-text {
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bubble-2 {
+    top: 10%;
+    right: 0%;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+.bubble-2 .bubble-arrow {
+    top: 50%;
+    right: 80%;
+    transform: rotate(15deg);
+}
+
+.bubble-2 .bubble-text {
+    bottom: -40px;
+    right: 0;
+}
+
+.bubble-3 {
+    bottom: 20%;
+    left: -15%;
+    animation: float 7s ease-in-out infinite;
+}
+
+.bubble-3 .bubble-arrow {
+    bottom: -190%;
+    left: 60%;
+}
+
+.bubble-3 .bubble-arrow img {
+    width: 450px;
+}
+
+.bubble-3 .bubble-text {
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bubble-4 {
+    top: 50%;
+    right: -10%;
+    animation: float 9s ease-in-out infinite reverse;
+}
+
+.bubble-4 .bubble-arrow {
+    bottom: -100%;
+    right: -40%;
+}
+
+.bubble-4 .bubble-arrow img {
+    width: 400px;
+}
+
+.bubble-4 .bubble-text {
+    bottom: -40px;
+    right: 0;
+}
+
+.bubble-5 {
+    top: 0%;
+    left: 50%;
+    animation: float 5s ease-in-out infinite;
+}
+
+.bubble-5 .bubble-arrow {
+    top: 20%;
+    left: -80%;
+}
+
+.bubble-5 .bubble-text {
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 55, 52, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    cursor: pointer;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 30vw;
+    max-height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .destinasi-center {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transform: none;
+        top: auto;
+        left: auto;
+        margin: 2rem auto;
+    }
+
+    .destination-bubble {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        margin: 2rem 1rem;
+        display: inline-block;
+    }
+
+    .bubble-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bubble-1, .bubble-2, .bubble-3, .bubble-4, .bubble-5 {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+    }
+
+    /* Mobile Arrow Positioning */
+    .bubble-1 .bubble-arrow,
+    .bubble-2 .bubble-arrow,
+    .bubble-3 .bubble-arrow,
+    .bubble-4 .bubble-arrow,
+    .bubble-5 .bubble-arrow {
+        top: -25px;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        transform: translateX(-50%) rotate(0deg) !important;
+    }
+
+    .bubble-arrow img {
+        width: 40px;
+    }
+
+    /* Mobile Text Positioning */
+    .bubble-1 .bubble-text,
+    .bubble-2 .bubble-text,
+    .bubble-3 .bubble-text,
+    .bubble-4 .bubble-text,
+    .bubble-5 .bubble-text {
+        bottom: -35px;
+        left: 50%;
+        right: auto;
+        top: auto;
+        transform: translateX(-50%) !important;
+    }
+
+    .bubble-text span {
+        font-size: 0.8rem;
+    }
+
+    .destinasi-content {
+        flex-direction: column;
+        align-items: center;
+        min-height: auto;
+    }
+}
