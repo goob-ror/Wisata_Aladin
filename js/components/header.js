@@ -27,8 +27,8 @@ class Header extends HTMLElement {
     render() {
         this.innerHTML = `
         <style>
-            @import '../css/root.css';
-            @import '../css/components/header.css';
+            @import 'css/root.css';
+            @import 'css/components/header.css';
         </style>
         <header>
             <div class="container-header">
