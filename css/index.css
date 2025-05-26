@@ -1,8 +1,8 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import 'css/root.css';
 
-@import 'css/components/header.css';
-@import 'css/components/footer.css';
+@import '/css/components/header.css';
+@import '/css/components/footer.css';
 
 * {
   -webkit-font-smoothing: antialiased;
