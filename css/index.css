@@ -2,6 +2,12 @@
 @import './root.css';
 
 @import './components/header.css';
+@import './components/hero.css';
+@import './components/about.css';
+@import './components/destinasi.css';
+@import './components/gallery.css';
+@import './components/review.css';
+@import './components/contact.css';
 @import './components/footer.css';
 
 * {

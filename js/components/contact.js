@@ -23,7 +23,19 @@ class Contact extends HTMLElement {
                 e.preventDefault();
                 this.openSocialMedia(link.dataset.platform);
             });
+
+            link.addEventListener('touchstart', () => {
+                link.style.transform = 'translateX(4px)';
+            });
+
+            link.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    link.style.transform = '';
+                }, 150);
+            });
         });
+
+        this.setupMobileFormEnhancements();
     }
 
     handleFormSubmit() {
@@ -54,29 +66,83 @@ class Contact extends HTMLElement {
         }
     }
 
+    isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               window.innerWidth <= 768;
+    }
+
+    setupMobileFormEnhancements() {
+        const inputs = this.shadow.querySelectorAll('input, textarea');
+
+        inputs.forEach(input => {
+            if (input.tagName === 'TEXTAREA') {
+                input.addEventListener('input', () => {
+                    if (this.isMobileDevice()) {
+                        input.style.height = 'auto';
+                        input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+                    }
+                });
+            }
+
+            input.addEventListener('focus', () => {
+                if (this.isMobileDevice()) {
+                    setTimeout(() => {
+                        input.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 300);
+                }
+            });
+
+            input.addEventListener('blur', () => {
+                this.validateField(input);
+            });
+        });
+    }
+
+    validateField(field) {
+        const isValid = field.checkValidity();
+        const formGroup = field.closest('.form-group');
+
+        if (formGroup) {
+            formGroup.style.borderBottom = isValid ?
+                '2px solid rgba(196, 203, 47, 0.3)' :
+                '2px solid rgba(211, 47, 47, 0.6)';
+        }
+    }
+
     showNotification(message, type) {
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
 
+        const isMobile = this.isMobileDevice();
+
         notification.style.cssText = `
             position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            border-radius: 8px;
+            ${isMobile ? 'top: 10px; left: 10px; right: 10px;' : 'top: 20px; right: 20px;'}
+            padding: ${isMobile ? '16px 20px' : '12px 24px'};
+            border-radius: ${isMobile ? '6px' : '8px'};
             color: white;
             font-weight: 600;
+            font-size: ${isMobile ? '0.9rem' : '1rem'};
             z-index: 10000;
             animation: slideIn 0.3s ease;
             background: ${type === 'success' ? '#317242' : '#d32f2f'};
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: ${isMobile ? 'none' : '400px'};
         `;
 
         document.body.appendChild(notification);
 
         setTimeout(() => {
-            notification.remove();
-        }, 3000);
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, isMobile ? 4000 : 3000);
     }
 
     render() {
@@ -88,7 +154,6 @@ class Contact extends HTMLElement {
                 <div class="contact-header">
                     <h2>Contact Us</h2>
                 </div>
-
                 <div class="contact-columns">
                     <div class="left-column">
                         <div class="contact-form-container">
@@ -100,7 +165,6 @@ class Contact extends HTMLElement {
                                     <span class="magic-dot"></span>
                                 </div>
                             </div>
-
                             <form class="contact-form">
                                 <div class="form-group">
                                     <label for="name">Full Name</label>
@@ -109,7 +173,6 @@ class Contact extends HTMLElement {
                                         <img src="assets/icons/star.webp" alt="star"/>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="email">Email Address</label>
                                     <input type="email" id="email" name="email" required>
@@ -117,7 +180,6 @@ class Contact extends HTMLElement {
                                         <img src="assets/icons/star.webp" alt="star"/>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="phone">Phone Number (Optional)</label>
                                     <input type="tel" id="phone" name="phone">
@@ -125,7 +187,6 @@ class Contact extends HTMLElement {
                                         <img src="assets/icons/star.webp" alt="star"/>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="message">Your Message</label>
                                     <textarea id="message" name="message" rows="3" required></textarea>
@@ -133,7 +194,6 @@ class Contact extends HTMLElement {
                                         <img src="assets/icons/star.webp" alt="star"/>
                                     </div>
                                 </div>
-
                                 <button type="submit" class="submit-btn">
                                     <img src="assets/icons/magic-lamp.webp" alt="magic lamp"/>
                                     Send Message
@@ -155,7 +215,6 @@ class Contact extends HTMLElement {
                                     <span class="magic-dot"></span>
                                 </div>
                             </div>
-
                             <div class="social-links">
                                 <a href="#" class="social-link" data-platform="whatsapp">
                                     <div class="social-icon-container whatsapp">
@@ -163,21 +222,18 @@ class Contact extends HTMLElement {
                                     </div>
                                     <span>WhatsApp</span>
                                 </a>
-
                                 <a href="#" class="social-link" data-platform="instagram">
                                     <div class="social-icon-container instagram">
                                         <img src="assets/icons/instagram.webp" alt="Instagram"/>
                                     </div>
                                     <span>Instagram</span>
                                 </a>
-
                                 <a href="#" class="social-link" data-platform="youtube">
                                     <div class="social-icon-container youtube">
                                         <img src="assets/icons/youtube.webp" alt="YouTube"/>
                                     </div>
                                     <span>YouTube</span>
                                 </a>
-
                                 <a href="#" class="social-link" data-platform="tiktok">
                                     <div class="social-icon-container tiktok">
                                         <img src="assets/icons/tiktok.webp" alt="TikTok"/>
@@ -186,7 +242,6 @@ class Contact extends HTMLElement {
                                 </a>
                             </div>
                         </div>
-
                         <div class="maps-container">
                             <div class="maps-header">
                                 <div class="maps-icon">
@@ -199,7 +254,6 @@ class Contact extends HTMLElement {
                                     <span class="magic-dot"></span>
                                 </div>
                             </div>
-
                             <div class="maps-embed">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.6234567890123!2d117.15008008020982!3d-0.5322522454979108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMzEnNTYuMSJTIDExN8KwMDknMDAuMyJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid"
@@ -211,7 +265,6 @@ class Contact extends HTMLElement {
                                     referrerpolicy="no-referrer-when-downgrade">
                                 </iframe>
                             </div>
-
                             <div class="location-info">
                                 <div class="location-item">
                                     <img src="assets/icons/circus-tent.webp" alt="location"/>

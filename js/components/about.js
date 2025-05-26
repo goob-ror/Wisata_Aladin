@@ -33,34 +33,36 @@ class About extends HTMLElement {
 
                     <!-- Left Column -->
                     <div class="left-column">
-                        <div class="about-image">
-                            <img src="assets/wisata-aladn.webp"/>
-                        </div>
-                        <div class="operational-hours-card">
-                            <div class="hours-header">
-                                <div class="hours-icon">
-                                    <img src="assets/icons/schedule.webp"/>
-                                </div>
-                                <h3>Operational Hours</h3>
-                                <div class="hours-decoration">
-                                    <span class="magic-dot"></span>
-                                    <span class="magic-dot"></span>
-                                    <span class="magic-dot"></span>
-                                </div>
+                        <div class="mobile-bottom-section">
+                            <div class="about-image">
+                                <img src="assets/wisata-aladn.webp"/>
                             </div>
-                            <div class="hours-content">
-                                <div class="hours-item">
-                                    <div class="day-range">Monday - Saturday</div>
-                                    <div class="time-range">12:00 - 22:00</div>
+                            <div class="operational-hours-card">
+                                <div class="hours-header">
+                                    <div class="hours-icon">
+                                        <img src="assets/icons/schedule.webp"/>
+                                    </div>
+                                    <h3>Operational Hours</h3>
+                                    <div class="hours-decoration">
+                                        <span class="magic-dot"></span>
+                                        <span class="magic-dot"></span>
+                                        <span class="magic-dot"></span>
+                                    </div>
                                 </div>
-                                <div class="hours-divider"></div>
-                                <div class="hours-item">
-                                    <div class="day-range">Sunday</div>
-                                    <div class="time-range">11:00 - 22:00</div>
+                                <div class="hours-content">
+                                    <div class="hours-item">
+                                        <div class="day-range">Monday - Saturday</div>
+                                        <div class="time-range">12:00 - 22:00</div>
+                                    </div>
+                                    <div class="hours-divider"></div>
+                                    <div class="hours-item">
+                                        <div class="day-range">Sunday</div>
+                                        <div class="time-range">11:00 - 22:00</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="hours-footer">
-                                <span>Open Every Day</span>
+                                <div class="hours-footer">
+                                    <span>Open Every Day</span>
+                                </div>
                             </div>
                         </div>
                     </div>

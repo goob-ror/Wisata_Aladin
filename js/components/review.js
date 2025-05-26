@@ -196,21 +196,39 @@ class Review extends HTMLElement {
 
     setupEventListeners() {
         const starInputs = this.shadow.querySelectorAll('.star-input');
+        const starRating = this.shadow.querySelector('.star-rating');
+
         starInputs.forEach(star => {
             star.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.selectedRating = parseInt(e.target.dataset.rating);
+                this.updateStarRating();
+                this.openModal();
+            });
+
+            star.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.highlightStars(parseInt(e.target.dataset.rating));
+            });
+
+            star.addEventListener('touchend', (e) => {
+                e.preventDefault();
                 this.selectedRating = parseInt(e.target.dataset.rating);
                 this.updateStarRating();
                 this.openModal();
             });
 
             star.addEventListener('mouseenter', (e) => {
-                this.highlightStars(parseInt(e.target.dataset.rating));
+                if (!this.isMobileDevice()) {
+                    this.highlightStars(parseInt(e.target.dataset.rating));
+                }
             });
         });
 
-        const starRating = this.shadow.querySelector('.star-rating');
         starRating.addEventListener('mouseleave', () => {
-            this.resetStarHighlight();
+            if (!this.isMobileDevice()) {
+                this.resetStarHighlight();
+            }
         });
 
         const modal = this.shadow.querySelector('.review-modal');
@@ -227,9 +245,17 @@ class Review extends HTMLElement {
             }
         });
 
+        modal.addEventListener('touchstart', (e) => {
+            if (e.target === modal) {
+                this.closeModal();
+            }
+        });
+
         submitReview.addEventListener('click', () => {
             this.submitReview();
         });
+
+        this.setupCarouselTouchEvents();
     }
 
     setupAnimations() {
@@ -295,26 +321,6 @@ class Review extends HTMLElement {
         });
     }
 
-    openModal() {
-        const modal = this.shadow.querySelector('.review-modal');
-        const selectedStars = this.shadow.querySelector('.selected-stars');
-
-        selectedStars.innerHTML = this.generateStars(this.selectedRating);
-
-        modal.style.display = 'flex';
-        setTimeout(() => {
-            modal.classList.add('show');
-        }, 10);
-    }
-
-    closeModal() {
-        const modal = this.shadow.querySelector('.review-modal');
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300);
-    }
-
     submitReview() {
         const reviewerName = this.shadow.querySelector('#reviewerName').value;
         const reviewText = this.shadow.querySelector('#reviewText').value;
@@ -337,6 +343,90 @@ class Review extends HTMLElement {
         this.shadow.querySelector('#reviewText').value = '';
         this.selectedRating = 0;
         this.resetStarHighlight();
+    }
+
+    isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+               window.innerWidth <= 768;
+    }
+
+    setupCarouselTouchEvents() {
+        const carousel = this.shadow.querySelector('.reviews-carousel');
+        if (!carousel) return;
+
+        let isUserInteracting = false;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const pauseAnimation = () => {
+            if (!isUserInteracting) {
+                isUserInteracting = true;
+                carousel.style.animationPlayState = 'paused';
+            }
+        };
+
+        const resumeAnimation = () => {
+            if (isUserInteracting) {
+                isUserInteracting = false;
+                setTimeout(() => {
+                    if (!isUserInteracting) {
+                        carousel.style.animationPlayState = 'running';
+                    }
+                }, 1000);
+            }
+        };
+
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            pauseAnimation();
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            resumeAnimation();
+        });
+
+        carousel.addEventListener('mouseenter', pauseAnimation);
+        carousel.addEventListener('mouseleave', resumeAnimation);
+
+        carousel.addEventListener('touchend', () => {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                setTimeout(resumeAnimation, 2000);
+            }
+        });
+    }
+
+    openModal() {
+        const modal = this.shadow.querySelector('.review-modal');
+        const selectedStars = this.shadow.querySelector('.selected-stars');
+
+        selectedStars.innerHTML = this.generateStars(this.selectedRating);
+
+        modal.style.display = 'flex';
+
+        if (this.isMobileDevice()) {
+            document.body.style.overflow = 'hidden';
+        }
+
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+    }
+
+    closeModal() {
+        const modal = this.shadow.querySelector('.review-modal');
+        modal.classList.remove('show');
+
+        if (this.isMobileDevice()) {
+            document.body.style.overflow = '';
+        }
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
     }
 }
 

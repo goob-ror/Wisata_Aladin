@@ -47,6 +47,9 @@ class Gallery extends HTMLElement {
                     <div class="gallery-item image-item" data-position="1-2">
                         <img src="assets/images/image-2.webp" alt="Gallery Image 2" class="gallery-image" />
                     </div>
+                    <div class="gallery-item image-item" data-position="3-3">
+                        <img src="assets/images/image-5.webp" alt="Gallery Image 5" class="gallery-image" />
+                    </div>
                     <div class="gallery-item video-item video-tall" data-position="1-3">
                         <video class="gallery-video" poster="assets/images/image-3.webp">
                             <source src="assets/videos/videos-1.webm" type="video/webm">
@@ -57,6 +60,9 @@ class Gallery extends HTMLElement {
                                 <img src="assets/icons/play.webp"/>
                             </div>
                         </div>
+                    </div>
+                    <div class="gallery-item image-item" data-position="2-2">
+                        <img src="assets/images/image-3.webp" alt="Gallery Image 3" class="gallery-image" />
                     </div>
                     <div class="gallery-item video-item video-tall" data-position="2-1">
                         <video class="gallery-video" poster="assets/images/image-4.webp">
@@ -69,14 +75,8 @@ class Gallery extends HTMLElement {
                             </div>
                         </div>
                     </div>
-                    <div class="gallery-item image-item" data-position="2-2">
-                        <img src="assets/images/image-4.webp" alt="Gallery Image 4" class="gallery-image" />
-                    </div>
                     <div class="gallery-item image-item" data-position="3-2">
-                        <img src="assets/images/image-5.webp" alt="Gallery Image 5" class="gallery-image" />
-                    </div>
-                    <div class="gallery-item image-item" data-position="3-3">
-                        <img src="assets/images/image-6.webp" alt="Gallery Image 6" class="gallery-image" />
+                        <img src="assets/images/image-4.webp" alt="Gallery Image 4" class="gallery-image" />
                     </div>
                 </div>
                 <div class="gallery-modal" id="galleryModal">

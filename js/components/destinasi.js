@@ -3,11 +3,60 @@ class Destinasi extends HTMLElement {
         super();
         this.shadow = this.attachShadow({ mode: 'open' });
         this.currentModal = null;
+        this.activeDestination = 0;
+        this.autoPlayInterval = null;
+        this.isMobile = false;
     }
 
     connectedCallback() {
         this.render();
         this.setupEventListeners();
+        this.checkMobile();
+        this.startAutoPlay();
+    }
+
+    disconnectedCallback() {
+        this.stopAutoPlay();
+    }
+
+    checkMobile() {
+        this.isMobile = window.innerWidth <= 768;
+        window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= 768;
+            if (wasMobile !== this.isMobile) {
+                this.updateActiveDestination();
+            }
+        });
+    }
+
+    startAutoPlay() {
+        if (this.isMobile) {
+            this.autoPlayInterval = setInterval(() => {
+                this.activeDestination = (this.activeDestination + 1) % 5;
+                this.updateActiveDestination();
+            }, 3000);
+        }
+    }
+
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+
+    updateActiveDestination() {
+        if (this.isMobile) {
+            const mobileImages = this.shadow.querySelectorAll('.mobile-destination-item');
+            mobileImages.forEach((item, index) => {
+                if (index === this.activeDestination) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
     }
 
     setupEventListeners() {
@@ -16,11 +65,26 @@ class Destinasi extends HTMLElement {
             bubble.addEventListener('click', () => this.openModal(index + 1));
         });
 
+        const mobileItems = this.shadow.querySelectorAll('.mobile-destination-item');
+        mobileItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                this.stopAutoPlay();
+                this.activeDestination = index;
+                this.updateActiveDestination();
+                this.openModal(index + 1);
+                setTimeout(() => this.startAutoPlay(), 10000);
+            });
+        });
+
         this.shadow.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal-overlay')) {
                 this.closeModal();
             }
         });
+
+        setTimeout(() => {
+            this.updateActiveDestination();
+        }, 100);
     }
 
     openModal(imageNumber) {
@@ -64,59 +128,85 @@ class Destinasi extends HTMLElement {
                         <span><img src="assets/icons/X.webp"/></span>
                         <img src="assets/ok-jhon-coffee.webp" class="ok-jhon-coffee"/>
                     </div>
-                    <div class="destination-bubble bubble-1" data-destination="1">
-                        <div class="bubble-arrow">
-                            <img src="assets/doodles/rumah-makan-arrow.webp" alt="Arrow to Rumah Makan">
-                        </div>
-                        <div class="bubble-image">
+
+                    <div class="mobile-destinations-container">
+                        <div class="mobile-destination-item active" data-destination="1">
                             <img src="assets/images/destination/destination-1.webp" alt="Rumah Makan Aladin">
-                        </div>
-                        <div class="bubble-text">
                             <span>Aladin's Restaurant</span>
                         </div>
-                    </div>
-                    <div class="destination-bubble bubble-2" data-destination="2">
-                        <div class="bubble-arrow">
-                            <img src="assets/doodles/ok-jhon-coffee-arrow.webp" alt="Arrow to Coffee">
-                        </div>
-                        <div class="bubble-image">
+                        <div class="mobile-destination-item" data-destination="2">
                             <img src="assets/images/destination/destination-2.webp" alt="OK Jhon Coffee">
-                        </div>
-                        <div class="bubble-text">
                             <span>OK Jhon Coffee</span>
                         </div>
-                    </div>
-                    <div class="destination-bubble bubble-3" data-destination="3">
-                        <div class="bubble-arrow">
-                            <img src="assets/doodles/permainan-arrow.webp" alt="Arrow to Games">
-                        </div>
-                        <div class="bubble-image">
+                        <div class="mobile-destination-item" data-destination="3">
                             <img src="assets/images/destination/destination-3.webp" alt="Permainan">
-                        </div>
-                        <div class="bubble-text">
                             <span>Games</span>
                         </div>
-                    </div>
-                    <div class="destination-bubble bubble-4" data-destination="4">
-                        <div class="bubble-arrow">
-                            <img src="assets/doodles/live-music-arrow.webp" alt="Arrow to Music">
-                        </div>
-                        <div class="bubble-image">
+                        <div class="mobile-destination-item" data-destination="4">
                             <img src="assets/images/destination/destination-4.webp" alt="Live Music">
-                        </div>
-                        <div class="bubble-text">
                             <span>Live Music</span>
                         </div>
-                    </div>
-                    <div class="destination-bubble bubble-5" data-destination="5">
-                        <div class="bubble-arrow">
-                            <img src="assets/doodles/tempat-foto-arrow.webp" alt="Arrow to Photo Spot">
-                        </div>
-                        <div class="bubble-image">
+                        <div class="mobile-destination-item" data-destination="5">
                             <img src="assets/images/destination/destination-5.webp" alt="Tempat Foto">
-                        </div>
-                        <div class="bubble-text">
                             <span>Photo Spots</span>
+                        </div>
+                    </div>
+
+                    <div class="desktop-bubbles-container">
+                        <div class="destination-bubble bubble-1" data-destination="1">
+                            <div class="bubble-arrow">
+                                <img src="assets/doodles/rumah-makan-arrow.webp" alt="Arrow to Rumah Makan">
+                            </div>
+                            <div class="bubble-image">
+                                <img src="assets/images/destination/destination-1.webp" alt="Rumah Makan Aladin">
+                            </div>
+                            <div class="bubble-text">
+                                <span>Aladin's Restaurant</span>
+                            </div>
+                        </div>
+                        <div class="destination-bubble bubble-2" data-destination="2">
+                            <div class="bubble-arrow">
+                                <img src="assets/doodles/ok-jhon-coffee-arrow.webp" alt="Arrow to Coffee">
+                            </div>
+                            <div class="bubble-image">
+                                <img src="assets/images/destination/destination-2.webp" alt="OK Jhon Coffee">
+                            </div>
+                            <div class="bubble-text">
+                                <span>OK Jhon Coffee</span>
+                            </div>
+                        </div>
+                        <div class="destination-bubble bubble-3" data-destination="3">
+                            <div class="bubble-arrow">
+                                <img src="assets/doodles/permainan-arrow.webp" alt="Arrow to Games">
+                            </div>
+                            <div class="bubble-image">
+                                <img src="assets/images/destination/destination-3.webp" alt="Permainan">
+                            </div>
+                            <div class="bubble-text">
+                                <span>Games</span>
+                            </div>
+                        </div>
+                        <div class="destination-bubble bubble-4" data-destination="4">
+                            <div class="bubble-arrow">
+                                <img src="assets/doodles/live-music-arrow.webp" alt="Arrow to Music">
+                            </div>
+                            <div class="bubble-image">
+                                <img src="assets/images/destination/destination-4.webp" alt="Live Music">
+                            </div>
+                            <div class="bubble-text">
+                                <span>Live Music</span>
+                            </div>
+                        </div>
+                        <div class="destination-bubble bubble-5" data-destination="5">
+                            <div class="bubble-arrow">
+                                <img src="assets/doodles/tempat-foto-arrow.webp" alt="Arrow to Photo Spot">
+                            </div>
+                            <div class="bubble-image">
+                                <img src="assets/images/destination/destination-5.webp" alt="Tempat Foto">
+                            </div>
+                            <div class="bubble-text">
+                                <span>Photo Spots</span>
+                            </div>
                         </div>
                     </div>
                 </div>

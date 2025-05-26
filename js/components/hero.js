@@ -44,7 +44,7 @@ class Hero extends HTMLElement {
                 <div class="hero-content">
                     <h1></h1>
                     <p></p>
-                    <button class="cta-button">Start Your Journey</button>
+                    <button class="cta-button" onlick="window.location.href = '#destination';">Start Your Journey</button>
                 </div>
                 <div class="features-overlay">
                     <div class="feature-item active" data-feature="1">
