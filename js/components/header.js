@@ -2,12 +2,12 @@ class Header extends HTMLElement {
     constructor() {
         super();
     }
-    
+
     connectedCallback() {
         this.render();
         this.setupEventListeners();
     }
-    
+
     setupEventListeners() {
         const navLinks = this.querySelectorAll('.navigation a');
         navLinks.forEach(link => {
@@ -23,12 +23,12 @@ class Header extends HTMLElement {
             });
         });
     }
-    
+
     render() {
         this.innerHTML = `
         <style>
-            @import '/css/root.css';
-            @import '/css/components/header.css';
+            @import './css/root.css';
+            @import './css/components/header.css';
         </style>
         <header>
             <div class="container-header">

@@ -10,8 +10,8 @@ class About extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="/css/root.css">
-        <link rel="stylesheet" href="/css/components/about.css">
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/components/about.css">
         <about id="about">
             <div class="container-about">
                 <div class="about-header">

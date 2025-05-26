@@ -81,8 +81,8 @@ class Contact extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="/css/root.css">
-        <link rel="stylesheet" href="/css/components/contact.css">
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/components/contact.css">
         <contact id="contact">
             <div class="container-contact">
                 <div class="contact-header">

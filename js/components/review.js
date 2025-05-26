@@ -86,8 +86,8 @@ class Review extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="css/root.css">
-        <link rel="stylesheet" href="css/components/review.css">
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/components/review.css">
         <review id="review">
             <div class="container-review">
                 <!-- Header with magical decorative divider -->

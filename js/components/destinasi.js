@@ -49,8 +49,8 @@ class Destinasi extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="css/root.css">
-        <link rel="stylesheet" href="css/components/destinasi.css">
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/components/destinasi.css">
         <destinasi id="destination">
             <div class="container-destinasi">
                 <div class="destinasi-header">

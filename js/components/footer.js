@@ -64,8 +64,8 @@ class Footer extends HTMLElement {
     render() {
         this.innerHTML = `
         <style>
-            @import '/css/root.css';
-            @import '/css/components/footer.css';
+            @import './css/root.css';
+            @import './css/components/footer.css';
         </style>
         <footer>
             <div class="container-footer">

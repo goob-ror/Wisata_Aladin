@@ -11,8 +11,8 @@ class Gallery extends HTMLElement {
 
     render() {
         this.shadow.innerHTML = `\
-        <link rel="stylesheet" href="css/root.css">
-        <link rel="stylesheet" href="css/components/gallery.css">
+        <link rel="stylesheet" href="./css/root.css">
+        <link rel="stylesheet" href="./css/components/gallery.css">
         <gallery id="gallery">
             <div class="container-gallery">
                 <div class="gallery-header">
