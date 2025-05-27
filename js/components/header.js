@@ -111,8 +111,8 @@ class Header extends HTMLElement {
                     <ul>
                         <li><a href="#home">HOME</a></li>
                         <li><a href="#about">ABOUT</a></li>
-                        <li><a href="#gallery">GALLERY</a></li>
                         <li><a href="#destination">DESTINATION</a></li>
+                        <li><a href="#gallery">GALLERY</a></li>
                         <li><a href="#contact">CONTACT US</a></li>
                     </ul>
                 </nav>
