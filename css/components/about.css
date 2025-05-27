@@ -385,6 +385,14 @@ about {
     .about-columns {
         grid-template-columns: 1fr;
         gap: 2.4rem;
+        margin: 0 16px 2rem 16px;
+    }
+
+    .about-header,
+    .intro-text,
+    .mission-section {
+        margin-left: 16px;
+        margin-right: 16px;
     }
 
     .left-column {
